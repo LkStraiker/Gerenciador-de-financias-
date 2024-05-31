@@ -5,6 +5,8 @@ from openpyxl.styles import Font, Alignment
 from openpyxl.utils import get_column_letter
 from openpyxl.chart import PieChart, BarChart, Reference
 from openpyxl.chart.label import DataLabelList
+import os
+from datetime import datetime
 
 # Função para obter um número float válido do usuário
 def obter_numero_float(mensagem):
@@ -36,7 +38,7 @@ ponderacoes = {}
 
 # Define ponderações para as categorias
 ponderacoes_default = {
-     "água": 0.3,     # Menos reduzido
+    "água": 0.3,     # Menos reduzido
     "gás": 0.3,      # Menos reduzido
     "internet": 1.0,
     "luz": 0.7,      # Menos reduzido
@@ -115,7 +117,7 @@ df = pd.DataFrame({
     "Valor Reduzido (R$)": [val for val in list(despesas_reduzidas.values())] + [total_gasto_reduzido],
     "Porcentagem Original (%)": [(valor / salario) * 100 for valor in list(despesas.values())] + [(total_gasto / salario) * 100],
     "Porcentagem Reduzida (%)": [(valor / salario) * 100 for valor in list(despesas_reduzidas.values())] + [(total_gasto_reduzido / salario) * 100],
-    "Redução (%)": [((despesas[categoria] - val) / despesas[categoria]) * 100 if tipo_despesa[categoria] == 'V' else np.nan for categoria, val in despesas_reduzidas.items()] + [np.nan]
+       "Redução (%)": [((despesas[categoria] - val) / despesas[categoria]) * 100 if tipo_despesa[categoria] == 'V' else np.nan for categoria, val in despesas_reduzidas.items()] + [np.nan]
 })
 
 # Salva os dados em um arquivo Excel
@@ -161,3 +163,56 @@ ws.add_chart(pie_chart_reduzido, "H20")
 # Salva a planilha atualizada
 wb.save(arquivo_excel)
 print(f"\nOs resultados foram salvos no arquivo {arquivo_excel}.")
+
+# Função para salvar os dados em um arquivo separado
+def salvar_historico(nome_arquivo, df):
+    df.to_excel(nome_arquivo, index=False)
+
+# Função para carregar dados do histórico de um arquivo
+def carregar_historico(nome_arquivo):
+    if os.path.exists(nome_arquivo):
+        return pd.read_excel(nome_arquivo)
+    else:
+        print("Arquivo não encontrado.")
+        return None
+
+# Função para visualizar o histórico de finanças
+def visualizar_historico():
+    print("Histórico de Finanças:")
+    arquivos = [arquivo for arquivo in os.listdir() if arquivo.endswith('.xlsx')]
+    if arquivos:
+        for i, arquivo in enumerate(arquivos, 1):
+            print(f"{i}. {arquivo}")
+        escolha = input("Escolha o número do arquivo que deseja visualizar ou '0' para voltar: ")
+        if escolha.isdigit() and 0 < int(escolha) <= len(arquivos):
+            nome_arquivo = arquivos[int(escolha) - 1]
+            df = carregar_historico(nome_arquivo)
+            if df is not None:
+                print(df)
+    else:
+        print("Nenhum arquivo de histórico disponível.")
+
+# Função principal
+def main():
+    while True:
+        print("\n1. Adicionar Dados de Finanças")
+        print("2. Visualizar Histórico de Finanças")
+        print("3. Sair")
+        escolha = input("Escolha uma opção: ")
+
+        if escolha == "1":
+            # Adicionar dados de finanças
+            # Aqui você pode inserir o código para adicionar dados de finanças para um determinado período e salvá-los
+            pass
+        elif escolha == "2":
+            # Visualizar histórico de finanças
+            visualizar_historico()
+        elif escolha == "3":
+            print("Encerrando o programa...")
+            break
+        else:
+            print("Opção inválida. Por favor, escolha uma opção válida.")
+
+if __name__ == "__main__":
+    main()
+   
