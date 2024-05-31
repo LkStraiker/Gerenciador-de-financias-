@@ -1,27 +1,35 @@
-Este repositório contém um projeto de um Gerenciador de Finanças desenvolvido em Python. O objetivo deste projeto é fornecer uma ferramenta simples e eficaz para o controle e monitoramento das finanças pessoais.
+# Controle de Finanças Pessoais
 
-Recursos Principais:
+Este script Python foi desenvolvido para ajudar no controle das finanças pessoais, permitindo que o usuário insira suas despesas mensais e estabeleça metas de poupança. O script calcula se o usuário está gastando dentro do seu orçamento e, caso contrário, sugere reduções nas despesas variáveis para atingir as metas de poupança.
 
-Registro de Transações: Permite ao usuário registrar suas transações financeiras, incluindo receitas, despesas e transferências entre contas.
+## Requisitos
 
-Categorização de Transações: Possui um sistema de categorização flexível que permite ao usuário categorizar suas transações para uma melhor organização e análise.
+- Python 3.x
+- Bibliotecas Python: `numpy`, `pandas`, `openpyxl`
 
-Relatórios e Análises: Oferece funcionalidades para gerar relatórios detalhados e realizar análises sobre os gastos e receitas, proporcionando uma visão clara da situação financeira.
+## Funcionalidades
 
-Instruções de Uso:
+- Permite ao usuário inserir seu salário mensal e as despesas em diferentes categorias (fixas ou variáveis).
+- Calcula automaticamente o total gasto no mês e verifica se o usuário está dentro do orçamento.
+- Solicita ao usuário um valor de poupança desejado.
+- Se o usuário estiver gastando mais do que ganha, o script sugere reduções nas despesas variáveis para atingir a meta de poupança.
+- Salva os resultados em um arquivo Excel com os valores originais das despesas e os valores reduzidos.
+- Gera gráficos de pizza para visualizar a distribuição das despesas antes e depois da redução.
 
-Clone o repositório para o seu ambiente local.
+## Utilização
 
-Instale as dependências necessárias, se houver, conforme as instruções fornecidas no arquivo README.md.
+1. Execute o script Python `controle_financas.py`.
+2. Siga as instruções para inserir seu salário, despesas e meta de poupança.
+3. O script calculará automaticamente e informará se você está dentro do seu orçamento.
+4. Se necessário, ele sugerirá reduções nas despesas variáveis para atingir a meta de poupança.
+5. Os resultados serão salvos em um arquivo Excel chamado `despesas.xlsx`.
+6. Você pode visualizar o histórico de finanças, adicionando dados para diferentes períodos e visualizando-os posteriormente.
 
-Execute o aplicativo e siga as instruções para configurar sua conta e começar a registrar suas transações financeiras.
+## Personalização
 
-Tecnologias Utilizadas:
+- Você pode personalizar as categorias de despesas e suas ponderações ajustando o dicionário `ponderacoes_default`.
+- O script também inclui funções básicas para adicionar dados de finanças para diferentes períodos e visualizar o histórico de finanças.
 
-Python: Linguagem de programação principal utilizada no desenvolvimento do projeto.
-Bibliotecas Python: Possíveis bibliotecas utilizadas para implementar funcionalidades específicas, como pandas para análise de dados, Flask para desenvolvimento web, entre outras.
-Contribuição:
+---
 
-Contribuições são bem-vindas! Sinta-se à vontade para enviar pull requests com melhorias, correções de bugs ou novos recursos.
-
-Para quaisquer dúvidas ou sugestões, entre em contato.
+Sinta-se à vontade para ajustar e expandir o código conforme suas necessidades específicas!
